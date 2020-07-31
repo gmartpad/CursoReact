@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>React</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        // let botao = React.createElement(
+        //     'button', // qual elemento
+        //     {}, // atributos do elemento
+        //     'Clique Aqui' // conteudo do elemento (nesse caso, o innerHTML do botão)
+        // );
+
+        let botao = <button>Clique Aqui alterado</button>; // html dentro de javascript (JSX) oferecido pelo babel.min.js
+
+        let root = document.getElementById('root');
+
+        //Função inicial do React
+        ReactDOM.render(
+            botao, // O que você vai renderizar
+            root // Onde você vai renderizar
+        );
+    </script>
+</body>
+</html>
