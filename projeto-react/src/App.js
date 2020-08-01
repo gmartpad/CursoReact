@@ -1,24 +1,37 @@
 import React from 'react';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+//--------------------------------------------------
+
+// Componente por Classe
+
+// class App extends React.Component {
+
+//   render() {
+//     return <h1>Tomanokú</h1>
+//   }
+
+// }
+
+//---------------------------------------------------
+
+// Componente por Função
+
+// function App(){
+//   return <h1>Tomanokú</h1>;
+// }
+
+//---------------------------------------------------
+
+// Componente por Arrow Function
+
+// let App = () => {
+//   return <h1>Tomanokú</h1>
+// }
+
+//---------------------------------------------------
+
+// Componente por Arrow Function encurtada
+
+let App = () => <h1>Tomanokú</h1>;
 
 export default App;
