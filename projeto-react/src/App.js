@@ -16,7 +16,14 @@ const Title = styled.h1`
     font-size: 26px;
     color: ${props => props.color || "#f0f0f0"};
     font-weight: bold;
-    font-style: ${props => props.ativo === true ? "italic" : "normal"}
+    font-style: ${props => props.ativo === true ? "italic" : "normal"};
+
+`;
+
+const TitlePequeno = styled(Title)`
+
+    font-size: 16px;
+    border: 1px solid black;
 
 `;
 
@@ -56,6 +63,7 @@ function App(){
       <Title color="#0F0" ativo={true}>JEEJ</Title>
       <Title color="#00F" ativo={false}>JIIJ</Title>
       <Title ativo={false}>JOOJ</Title>
+      <TitlePequeno>jooj</TitlePequeno>
     </TitleBox>
     {/* <Avatar user={user}/> */}
     {/* <BemVinde nome="Joana" idade="18"/>
