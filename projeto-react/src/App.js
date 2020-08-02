@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css';
 
 // function formataNome(usuario){
 //     return usuario.nome+" "+usuario.sobrenome;
@@ -10,11 +11,11 @@ import React from 'react';
 
 function Avatar(props) {
     return (
-        <>
+        <div className="avatarDiv" style={{backgroundColor: '#f00', padding: 10}}>
             <img src={props.user.url} alt={props.user.name} />
             <br/>
             <strong>{props.user.name}</strong>
-        </>
+        </div>
     );
 }
 
