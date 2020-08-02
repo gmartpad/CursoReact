@@ -14,8 +14,9 @@ const TitleBox = styled.div`
 const Title = styled.h1`
 
     font-size: 26px;
-    color: #0f0;
+    color: ${props => props.color || "#f0f0f0"};
     font-weight: bold;
+    font-style: ${props => props.ativo === true ? "italic" : "normal"}
 
 `;
 
@@ -51,7 +52,10 @@ function App(){
   return <>
 
     <TitleBox>
-        <Title>JOOJ</Title>
+      <Title color="#F00" ativo={true}>JAAJ</Title>
+      <Title color="#0F0" ativo={true}>JEEJ</Title>
+      <Title color="#00F" ativo={false}>JIIJ</Title>
+      <Title ativo={false}>JOOJ</Title>
     </TitleBox>
     {/* <Avatar user={user}/> */}
     {/* <BemVinde nome="Joana" idade="18"/>
