@@ -76,8 +76,24 @@ function App(){
     <input id="moduloInput" type="number" value={modulo} onChange={(e) => {setModulo(e.target.value)}}/>
     <button onClick={() => botaoAction("-", modulo)}>diminuir</button>
     <button onClick={() => botaoAction("*", modulo)}>mult</button>
-    <button onClick={() => botaoAction("/", modulo)}>div</button>
+    
+    {/* Condicional de exibição */}
+    
+    {modulo % 2 === 0 && // se o modulo for par exibe o botão
+    
+      <button onClick={() => botaoAction("/", modulo)}>div</button>
+    
+    }
 
+    {modulo != 0 && //se o modulo for diferente de zero, mostra o parágrafo
+    
+      <>
+        <br/>
+        <p>Módulo a ser calculado: {modulo}</p>
+      </>
+    }
+      <br/>
+      <p>{modulo.length} algarismo{modulo.length !== 1 ? 's' : ''}</p>
 
     {/* <TitleBox>
       <Title color="#F00" ativo={true}>JAAJ</Title>
