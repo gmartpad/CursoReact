@@ -48,15 +48,17 @@ import styled from 'styled-components';
 function App(){
 
     const [ contagem, setContagem ] = useState(0); // valor 0 no useState é o valor inicial de contagem
+    const [ modulo, setModulo ] = useState(0);
     /* variavel do state e set(nome da variavel do state)  */
 
     const botaoAction = (sinal, modulo) => {
       setContagem(eval(`${contagem} ${sinal} ${modulo}`));
     };
 
-    const moduloInputValue = () => {
-      return parseInt(document.querySelector('#moduloInput').value);
-    };
+
+    // const moduloInputValue = () => {
+    //   return parseInt(document.querySelector('#moduloInput').value);
+    // };
 
     // let user = {
     //     url: "https://www.google.com.br/google.jpg",
@@ -70,11 +72,11 @@ function App(){
   return <>
 
     <div>{contagem}</div>
-    <button onClick={() => botaoAction("+", moduloInputValue())}>aumentar</button>
-    <input id="moduloInput" type="text"/>
-    <button onClick={() => botaoAction("-", moduloInputValue())}>diminuir</button>
-    <button onClick={() => botaoAction("*", moduloInputValue())}>mult</button>
-    <button onClick={() => botaoAction("/", moduloInputValue())}>div</button>
+    <button onClick={() => botaoAction("+", modulo)}>aumentar</button>
+    <input id="moduloInput" type="number" value={modulo} onChange={(e) => {setModulo(e.target.value)}}/>
+    <button onClick={() => botaoAction("-", modulo)}>diminuir</button>
+    <button onClick={() => botaoAction("*", modulo)}>mult</button>
+    <button onClick={() => botaoAction("/", modulo)}>div</button>
 
 
     {/* <TitleBox>
