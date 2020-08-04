@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import CaixaDePesquisa  from './components/CaixaDePesquisa';
+
 // import './App.css';
 
 // const TitleBox = styled.div`
@@ -47,25 +49,25 @@ import styled from 'styled-components';
 
 function App(){
 
-    const [ contagem, setContagem ] = useState(0); // valor 0 no useState é o valor inicial de contagem
+    // const [ contagem, setContagem ] = useState(0); // valor 0 no useState é o valor inicial de contagem
     
-    useEffect(() => {
-      if(contagem == 0){
-        document.title = "Vai começar a cachorrada!";
-      }else{
-        document.title = "Contagem: "+contagem;
-      }
+    // useEffect(() => {
+    //   if(contagem == 0){
+    //     document.title = "Vai começar a cachorrada!";
+    //   }else{
+    //     document.title = "Contagem: "+contagem;
+    //   }
 
-      return () => {
-        console.log("contagem foi destruido");
-      }
-    }, 
-    [contagem]
-    );
+    //   return () => {
+    //     console.log("contagem foi destruido");
+    //   }
+    // }, 
+    // [contagem]
+    // );
 
-    function aumentarAction() {
-      setContagem(contagem + 1);
-    }
+    // function aumentarAction() {
+    //   setContagem(contagem + 1);
+    // }
     
     // const [ modulo, setModulo ] = useState(0);
     /* variavel do state e set(nome da variavel do state)  */
@@ -88,10 +90,14 @@ function App(){
 
     // let imagem = 'https://www.google.com.br/google.jpg';
 
-  return <>
+  return (
+      <>
 
-            <h1>Contagem: {contagem}</h1>
-            <button onClick={aumentarAction}>Aumentar Número</button>
+        <CaixaDePesquisa frasePadrao="Essa frase é o value inicial"/>
+        <CaixaDePesquisa />
+
+            {/* <h1>Contagem: {contagem}</h1>
+            <button onClick={aumentarAction}>Aumentar Número</button> */}
 
     {/* <div>{contagem}</div>
     <button onClick={() => botaoAction("+", modulo)}>aumentar</button>
@@ -131,7 +137,8 @@ function App(){
     {/* <h1>meu nome é {formataNome(usuario)} e eu tenho {idade} anos</h1>
     <img className="classe" style={{width:100, height:100}} alt="logo do google" src={imagem} /> */}
   
-  </>;
+      </>
+  );
 }
 
 //--------------------------------------------------
