@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 // import './App.css';
 
@@ -48,12 +48,31 @@ import styled from 'styled-components';
 function App(){
 
     const [ contagem, setContagem ] = useState(0); // valor 0 no useState é o valor inicial de contagem
-    const [ modulo, setModulo ] = useState(0);
+    
+    useEffect(() => {
+      if(contagem == 0){
+        document.title = "Vai começar a cachorrada!";
+      }else{
+        document.title = "Contagem: "+contagem;
+      }
+
+      return () => {
+        console.log("contagem foi destruido");
+      }
+    }, 
+    [contagem]
+    );
+
+    function aumentarAction() {
+      setContagem(contagem + 1);
+    }
+    
+    // const [ modulo, setModulo ] = useState(0);
     /* variavel do state e set(nome da variavel do state)  */
 
-    const botaoAction = (sinal, modulo) => {
-      setContagem(eval(`${contagem} ${sinal} ${modulo}`));
-    };
+    // const botaoAction = (sinal, modulo) => {
+    //   setContagem(eval(`${contagem} ${sinal} ${modulo}`));
+    // };
 
 
     // const moduloInputValue = () => {
@@ -71,15 +90,18 @@ function App(){
 
   return <>
 
-    <div>{contagem}</div>
+            <h1>Contagem: {contagem}</h1>
+            <button onClick={aumentarAction}>Aumentar Número</button>
+
+    {/* <div>{contagem}</div>
     <button onClick={() => botaoAction("+", modulo)}>aumentar</button>
     <input id="moduloInput" type="number" value={modulo} onChange={(e) => {setModulo(e.target.value)}}/>
     <button onClick={() => botaoAction("-", modulo)}>diminuir</button>
-    <button onClick={() => botaoAction("*", modulo)}>mult</button>
+    <button onClick={() => botaoAction("*", modulo)}>mult</button> */}
     
     {/* Condicional de exibição */}
     
-    {modulo % 2 === 0 && // se o modulo for par exibe o botão
+    {/* {modulo % 2 === 0 && // se o modulo for par exibe o botão
     
       <button onClick={() => botaoAction("/", modulo)}>div</button>
     
@@ -93,7 +115,7 @@ function App(){
       </>
     }
       <br/>
-      <p>{modulo.length} algarismo{modulo.length !== 1 ? 's' : ''}</p>
+      <p>{modulo.length} algarismo{modulo.length !== 1 ? 's' : ''}</p> */}
 
     {/* <TitleBox>
       <Title color="#F00" ativo={true}>JAAJ</Title>
