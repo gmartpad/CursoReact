@@ -15,6 +15,12 @@ function CaixaDePesquisa(props) {
 
     const [valueText, setValueText] = useState(props.frasePadrao || 'escreve uns negócio aí');
 
+    useEffect(() => {
+        if(props.onChangeText){
+            props.onChangeText(valueText);
+        }
+    }, [valueText]);
+
     return (
         <InputText type="text" value={valueText} onChange={(e) => {setValueText(e.target.value)}}/>
     );

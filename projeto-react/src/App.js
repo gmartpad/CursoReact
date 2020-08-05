@@ -47,7 +47,14 @@ import CaixaDePesquisa  from './components/CaixaDePesquisa';
 //     );
 // }
 
+
 function App(){
+
+    const [ textoCaixa, setTextoCaixa ] = useState('')
+
+    function returnTextoCaixa(string) {
+      setTextoCaixa(string);
+    }
 
     // const [ contagem, setContagem ] = useState(0); // valor 0 no useState é o valor inicial de contagem
     
@@ -93,8 +100,11 @@ function App(){
   return (
       <>
 
-        <CaixaDePesquisa frasePadrao="Essa frase é o value inicial"/>
-        <CaixaDePesquisa />
+        <CaixaDePesquisa frasePadrao="Essa frase é o value inicial" onChangeText={returnTextoCaixa}/>
+
+        <hr/>
+
+        <h1>Texto: {textoCaixa}</h1>
 
             {/* <h1>Contagem: {contagem}</h1>
             <button onClick={aumentarAction}>Aumentar Número</button> */}
