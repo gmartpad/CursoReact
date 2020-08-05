@@ -13,16 +13,31 @@ const InputText = styled.input`
 
 function CaixaDePesquisa(props) {
 
-    const [valueText, setValueText] = useState(props.frasePadrao || 'escreve uns negócio aí');
+    const [valueText, setValueText] = useState(props.frasePadrao);
 
-    useEffect(() => {
-        if(props.onChangeText){
-            props.onChangeText(valueText);
+    // useEffect(() => {
+    //     if(props.onChangeText){
+    //         props.onChangeText(valueText);
+    //     }
+    // }, [valueText]);
+
+    function handleKeyUp(e) {
+        if(e.keyCode == 13) {
+            if(props.onEnter){
+                props.onEnter(valueText);
+            }
+            setValueText('');            
         }
-    }, [valueText]);
+    }
 
     return (
-        <InputText type="text" value={valueText} onChange={(e) => {setValueText(e.target.value)}}/>
+        <InputText 
+            type="text"
+            value={valueText}
+            placeholder={valueText} 
+            onKeyUp={handleKeyUp}
+            onChange={(e) => {setValueText(e.target.value)}}
+        />
     );
 
 }

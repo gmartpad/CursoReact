@@ -21,10 +21,19 @@ function App(){
 
     }, [])
 
+    function addAction(novoItem) {
+      let novaLista = [ ...lista, { titulo:novoItem, done:false } ];
+
+      setLista(novaLista);
+    }
+
   return (
       <>
 
-        <CaixaDePesquisa frasePadrao="Essa frase é o value inicial" onChangeText={returnTextoCaixa}/>
+        <CaixaDePesquisa 
+          frasePadrao="Essa frase é o value inicial" 
+          onEnter={addAction}
+        />
 
         <hr/>
 
