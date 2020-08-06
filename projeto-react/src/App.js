@@ -27,6 +27,13 @@ function App(){
       setLista(novaLista);
     }
 
+    function handleToggleDone(index) {
+      lista[index].done = !lista[index].done;
+
+      let listaAtualizada = [ ...lista ];
+      setLista(listaAtualizada);
+    }
+
   return (
       <>
 
@@ -39,7 +46,7 @@ function App(){
 
         <ul>
           {lista.map( (item, index) => (
-            <li key={index}>
+            <li key={index} onClick={() => handleToggleDone(index)}>
               {item.done ? <del>{item.titulo}</del> : item.titulo}
             </li>) 
           )}
