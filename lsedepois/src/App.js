@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+import Home from './pages/Home';
+import Sobre from './pages/Sobre';
 //import Modal from './components/Modal'
 //import logo from './logo.svg';
 //import './App.css';
@@ -40,7 +42,21 @@ function App() {
           </ul>
         </nav>
       </header>
+      <hr/>
 
+      <Switch>
+        <Route exact path="/"> {/**se a url for exact o que tá no path, ele renderezina o elemento */}
+          <Home />
+        </Route>
+        <Route path="/sobre">
+          <Sobre />
+        </Route>
+      </Switch>
+
+      <hr/>
+      <footer>
+        Todos os Direitos Reservados
+      </footer>
       {/* <button onClick={() => modalAction(buttonBool)}>Abrir Modal</button>
       
       <Modal modalVisibility={modalAction} visible={buttonBool}>
