@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Sobre from './pages/Sobre';
+import Categoria from './pages/Categoria';
+import Produto from './pages/Produto';
 //import Modal from './components/Modal'
 //import logo from './logo.svg';
 //import './App.css';
@@ -39,6 +41,18 @@ function App() {
           <li>
             <Link to="/sobre">Sobre</Link>
           </li>
+          <li>
+            <Link to="/categoria/noticias">Notícias</Link>
+          </li>
+          <li>
+            <Link to="/categoria/esportes">Esportes</Link>
+          </li>
+          <li>
+            <Link to="/categoria/viagem">Viagem</Link>
+          </li>
+          <li>
+            <Link to="/produto/123">Produto</Link>
+          </li>
           </ul>
         </nav>
       </header>
@@ -50,6 +64,12 @@ function App() {
         </Route>
         <Route path="/sobre">
           <Sobre />
+        </Route>
+        <Route path="/categoria/:cat">
+          <Categoria />
+        </Route>
+        <Route path="/produto/:id">
+          <Produto />
         </Route>
       </Switch>
 
