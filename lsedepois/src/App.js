@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import Modal from './components/Modal'
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+//import Modal from './components/Modal'
 //import logo from './logo.svg';
 //import './App.css';
 
 function App() {
 
   // const [nome, setNome] = useState( localStorage.getItem('name') );
-  const [buttonBool, setButtonBool] = useState(false);
+  //const [buttonBool, setButtonBool] = useState(false);
 
   // function handleKeyUp(e) {
   //   if(e.keyCode == 13){
@@ -18,19 +19,33 @@ function App() {
 
   // ])
 
-  function modalAction(bool) {
-    const newBool = bool;
-    setButtonBool(!newBool);
-  }
+  // function modalAction(bool) {
+  //   const newBool = bool;
+  //   setButtonBool(!newBool);
+  // }
 
   return (
-    <>
+    <BrowserRouter>
 
-      <button onClick={() => modalAction(buttonBool)}>Abrir Modal</button>
+      <header>
+        <h1>Meu site super divertido</h1>
+        <nav>
+          <ul>
+          <li>
+            <Link to="/" >Home</Link>
+          </li>
+          <li>
+            <Link to="/sobre">Sobre</Link>
+          </li>
+          </ul>
+        </nav>
+      </header>
+
+      {/* <button onClick={() => modalAction(buttonBool)}>Abrir Modal</button>
       
       <Modal modalVisibility={modalAction} visible={buttonBool}>
         <h1>Testando</h1>
-      </Modal>
+      </Modal> */}
 
       {/* Nome: {nome}
       <br/>
@@ -43,7 +58,8 @@ function App() {
         onKeyUp={handleKeyUp}
       /> */}
 
-    </>
+    </BrowserRouter>
+
   );
 }
 
