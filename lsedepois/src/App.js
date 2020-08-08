@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Link, Redirect } from 'react-router-dom';
 import Home from './pages/Home';
 import Sobre from './pages/Sobre';
 import Categoria from './pages/Categoria';
@@ -54,6 +54,9 @@ function App() {
           <li>
             <Link to="/produto/123">Produto</Link>
           </li>
+          <li>
+            <Link to="/quem-somos">Quem Somos</Link>
+          </li>
           </ul>
         </nav>
       </header>
@@ -65,6 +68,9 @@ function App() {
         </Route>
         <Route path="/sobre">
           <Sobre />
+        </Route>
+        <Route path="/quem-somos">
+          <Redirect to="/sobre"/>
         </Route>
         <Route path="/categoria">
           <Categoria />
