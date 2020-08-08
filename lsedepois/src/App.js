@@ -29,6 +29,16 @@ function App() {
   //   setButtonBool(!newBool);
   // }
 
+  const isLogged = true;
+
+  const PrivateRoute = ({ children, ...rest }) => {
+    return (
+      <Route {...rest} >
+        { isLogged ? children : <Redirect to="/"/> }
+      </Route>
+    );
+  }
+
   return (
     <BrowserRouter>
 
@@ -39,10 +49,8 @@ function App() {
           <li>
             <Link to="/" >Home</Link>
           </li>
-          <li>
-            <Link to="/sobre">Sobre</Link>
-          </li>
-          <li>
+          {isLogged ? <li><Link to="/sobre">Sobre</Link></li> : null }
+          {/* <li>
             <Link to="/categoria?tipo=noticias">Notícias</Link>
           </li>
           <li>
@@ -55,8 +63,8 @@ function App() {
             <Link to="/produto/123">Produto</Link>
           </li>
           <li>
-            <Link to="/quem-somos">Quem Somos</Link>
-          </li>
+            <Link to="/quem-somos">Quem Somos</Link> */}
+          {/* </li> */}
           </ul>
         </nav>
       </header>
@@ -66,10 +74,11 @@ function App() {
         <Route exact path="/"> {/**se a url for exact o que tá no path, ele renderezina o elemento */}
           <Home />
         </Route>
-        <Route path="/sobre">
+        <PrivateRoute path="/sobre">
           <Sobre />
-        </Route>
-        <Route path="/quem-somos">
+          {/* isLogged ? <Sobre /> : <Redirect to="/"/> */}
+        </PrivateRoute>
+        {/* <Route path="/quem-somos">
           <Redirect to="/sobre"/>
         </Route>
         <Route path="/categoria">
@@ -80,7 +89,7 @@ function App() {
         </Route>
         <Route path="*">
           <ErrorPage/>
-        </Route>
+        </Route> */}
       </Switch>
 
       <hr/>
