@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Sobre from './pages/Sobre';
 import Categoria from './pages/Categoria';
 import Produto from './pages/Produto';
+import ErrorPage from './pages/Error';
 //import Modal from './components/Modal'
 //import logo from './logo.svg';
 //import './App.css';
@@ -70,6 +71,9 @@ function App() {
         </Route>
         <Route path="/produto/:id">
           <Produto />
+        </Route>
+        <Route path="*">
+          <ErrorPage/>
         </Route>
       </Switch>
 
