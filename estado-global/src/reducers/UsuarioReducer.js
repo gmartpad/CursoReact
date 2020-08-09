@@ -1,5 +1,6 @@
 const initialState = {
-    name: ''
+    name: 'Gabriel',
+    contador: 0
 };
 
 const UsuarioReducer = (state = initialState, action) => {
@@ -8,7 +9,10 @@ const UsuarioReducer = (state = initialState, action) => {
         case 'SET_NAME':
             return { ...state, name: action.payload.name }
             break;
-    }
+        case 'SET_CONTADOR':
+            return { ...state, contador: action.payload.contador }
+            break;
+    }       
     
     return state
 };
