@@ -2,9 +2,21 @@ import React from 'react';
 import { BrowserRouter, Route, Redirect, Switch, Link } from 'react-router-dom';
 import Home from './components/Home';
 import Sobre from './components/Sobre';
+import Login from './components/Login';
 
 
 function App() {
+
+  const isLogged = false;
+
+  const PrivateRoute = ({ children, ...rest }) => {
+    return (
+      <Route {...rest} >
+        { isLogged ? children : <Redirect to="/login"/> }
+      </Route>
+    );
+  }
+
   return (
     <BrowserRouter>
       <div className="header">
@@ -24,8 +36,11 @@ function App() {
         <Route exact path="/">
           <Home/>
         </Route>
-        <Route path="/sobre">
+        <PrivateRoute path="/sobre">
           <Sobre/>
+        </PrivateRoute>
+        <Route>
+          <Login/>
         </Route>
       </Switch>
     </BrowserRouter>
