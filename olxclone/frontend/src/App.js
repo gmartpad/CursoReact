@@ -1,12 +1,25 @@
 import React from 'react';
-//import logo from './logo.svg';
+import { connect } from 'react-redux';
 //import './App.css';
 
-function App() {
+const Page = (props) => {
   return (
     <>
+      <div>Opa, funcionando...</div>
     </>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    user:state.user
+  };
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Page);
