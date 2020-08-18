@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PageArea } from './styled';
 import useApi from '../../helpers/OlxAPI';
 import { doLogin } from '../../helpers/AuthHandler';
 
-import { PageContainer, PageTitle } from '../../components/MainComponents';
+import { PageContainer, PageTitle, ErrorMessage } from '../../components/MainComponents';
 
 const Page = () => {
 
@@ -36,29 +36,55 @@ const Page = () => {
                 Login
             </PageTitle>
             <PageArea>
+                { error &&
+                
+                    <ErrorMessage>{error}</ErrorMessage>    
+
+                }
                 <form onSubmit={handleSubmit}>
                     <label className="area">
                         <div className="area--title">E-mail</div>
                         <div className="area--input">
-                            <input disabled={disabled} type="email" />
+                            <input 
+                                disabled={disabled} 
+                                type="email" 
+                                value={email}
+                                onChange={e=>setEmail(e.target.value)}
+                                required
+                            />
                         </div>
                     </label>
                     <label className="area">
                         <div className="area--title">Senha</div>
                         <div className="area--input">
-                            <input disabled={disabled} type="password" />
+                            <input 
+                                disabled={disabled} 
+                                type="password" 
+                                value={password}
+                                onChange={e=>setPassword(e.target.value)}
+                                required
+                            />
                         </div>
                     </label> 
                     <label className="area">
                         <div className="area--title">Lembrar Senha</div>
                         <div className="area--input">
-                            <input disabled={disabled} type="checkbox" />
+                            <input 
+                                disabled={disabled} 
+                                type="checkbox" 
+                                checked={rememberPassword}
+                                onChange={()=>setRememberPassword(!rememberPassword)}
+                            />
                         </div>
                     </label>
                     <label className="area">
                         <div className="area--title"></div>
                         <div className="area--input">
-                            <button disabled={disabled}>Fazer Login</button>
+                            <button 
+                                disabled={disabled}
+                            >
+                                Fazer Login
+                            </button>
                         </div>
                     </label>
 
