@@ -22,7 +22,7 @@ const Header = () => {
                 </div>
                 <nav>
                     <ul>
-                        {logged ?
+                        {isLogged() ?
                         
                             <>
                                 <li>
