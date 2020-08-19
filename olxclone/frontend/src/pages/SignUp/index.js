@@ -56,12 +56,20 @@ const Page = () => {
 
         setDisabled(true);
 
-        const json = await api.login(email, password);
+        setError('');
+
+        if(password !== confirmPassword){
+            setError('Senhas não batem!');
+            setDisabled(false);
+            return;
+        }
+
+        const json = await api.register(name, email, password, stateLoc);
 
         if(json.error) {
             setError(json.error);
         } else {
-            doLogin(json.token, confirmPassword);
+            doLogin(json.token);
             window.location.href = '/';
         }
 

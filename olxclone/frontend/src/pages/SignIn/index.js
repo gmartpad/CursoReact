@@ -20,6 +20,8 @@ const Page = () => {
 
         setDisabled(true);
 
+        setError('');
+
         const json = await api.login(email, password);
 
         if(json.error) {
