@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { PageArea, SearchArea } from './styled';
 import useApi from '../../helpers/OlxAPI';
 import { Link } from 'react-router-dom';
+import AdItem from '../../components/partials/AdItem';
 
 import { PageContainer } from '../../components/MainComponents';
 
@@ -11,6 +12,7 @@ const Page = () => {
 
     const [stateList, setStateList] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [adList, setAdList] = useState([]);
 
     useEffect(()=>{
         const getStates = async () => {
@@ -27,6 +29,18 @@ const Page = () => {
         }
         getCategories();
     }, []);
+
+    useEffect(()=>{
+        const getRecentAds = async () => {
+            const json = await api.getAds({
+                sort:'desc',
+                limit:8,
+            });
+            setAdList(json.ads);
+        }
+        getRecentAds();
+    }, []);
+
 
     return (
         <>
@@ -55,7 +69,18 @@ const Page = () => {
             </SearchArea>
             <PageContainer>
                 <PageArea>
-                    
+                    <h2>Anúncios Recentes</h2>
+                    <div className="list">
+                        {adList.map((i, k)=>
+                            <AdItem key={k} data={i} />
+                        )}
+                    </div>
+                    <Link to="/ads" className="seeAllLink">Ver todos</Link>
+
+                    <hr/>
+
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+
                 </PageArea>
             </PageContainer>
         </>
