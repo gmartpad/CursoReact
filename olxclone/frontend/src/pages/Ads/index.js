@@ -25,10 +25,13 @@ const Page = () => {
     const [stateList, setStateList] = useState([]);
     const [categories, setCategories] = useState([]);
     const [adList, setAdList] = useState([]);
+    const [adListDisplay, setAdListDisplay] = useState('none');
 
     const [resultOpacity, setResultOpacity] = useState(1);
+    const [loading, setLoading] = useState(true);
 
     const getAdsList = async () => {
+        setLoading(true);
         const json = await api.getAds({
             sort:'desc',
             limit:9,
@@ -38,7 +41,12 @@ const Page = () => {
         });
         setAdList(json.ads)
         setResultOpacity(1);
+        setLoading(false);
     }
+
+    useEffect(()=>{
+        loading ? setAdListDisplay('none') : setAdListDisplay('flex');
+    }, [loading])
 
     useEffect(() => {
 
@@ -142,7 +150,20 @@ const Page = () => {
                 </div>
                 <div className="rightSide">
                     <h2>Resultados</h2>
-                    <div className="list" style={{opacity:resultOpacity}}>
+                    
+                    {loading &&
+                    
+                        <div className="listWarning">Carregando...</div>
+
+                    }
+
+                    {!loading && adList == '' &&
+                    
+                        <div className="listWarning">Não encontramos resultados.</div>
+                        
+                    }
+
+                    <div className="list" style={{opacity:resultOpacity, display:adListDisplay}}>
                         {adList.map((i, k)=>
                             <AdItem key={k} data={i}/>
                         )}
