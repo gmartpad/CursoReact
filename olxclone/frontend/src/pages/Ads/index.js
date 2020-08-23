@@ -18,14 +18,18 @@ const Page = () => {
     }
     const query = useQueryString();
 
+    const pageLimit = 9;
+
     const [q, setQ] = useState( query.get('q') != null ? query.get('q') : '');
     const [cat, setCat] = useState(query.get('cat') != null ? query.get('cat') : '');
     const [state, setState] = useState(query.get('state') != null ? query.get('state') : '');    
 
+    const [adsTotal, setAdsTotal] = useState(0);
     const [stateList, setStateList] = useState([]);
     const [categories, setCategories] = useState([]);
     const [adList, setAdList] = useState([]);
     const [adListDisplay, setAdListDisplay] = useState('none');
+    const [pageCount, setPageCount] = useState(0);
 
     const [resultOpacity, setResultOpacity] = useState(1);
     const [loading, setLoading] = useState(true);
@@ -34,15 +38,24 @@ const Page = () => {
         setLoading(true);
         const json = await api.getAds({
             sort:'desc',
-            limit:9,
+            limit:pageLimit,
             q,
             cat,
             state,
         });
         setAdList(json.ads)
+        setAdsTotal(json.total);
         setResultOpacity(1);
         setLoading(false);
     }
+
+    useEffect(()=>{
+        if(adList.length > 0){
+            setPageCount(Math.ceil(adsTotal/adList.length));
+        }else{
+            setPageCount(0);
+        }
+    }, [adsTotal])
 
     useEffect(()=>{
         loading ? setAdListDisplay('none') : setAdListDisplay('flex');
@@ -106,6 +119,10 @@ const Page = () => {
         getRecentAds();
     }, []);
 
+    let pagination = [];
+    for(let i=1;i<pageCount;i++){
+        pagination.push(i);
+    }
 
     return (
         <PageContainer>
@@ -168,6 +185,17 @@ const Page = () => {
                             <AdItem key={k} data={i}/>
                         )}
                     </div>
+
+                    <div className="pagination">
+                        {pageCount > 0 &&
+                        
+                            pagination.map((i, k)=>
+                                <div key={k} className="pagItem">{i}</div>
+                            )
+
+                        }
+                    </div>
+
                 </div>
             </PageArea>
         </PageContainer>
