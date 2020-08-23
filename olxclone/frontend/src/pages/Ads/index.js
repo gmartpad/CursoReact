@@ -28,20 +28,24 @@ const Page = () => {
     const [stateList, setStateList] = useState([]);
     const [categories, setCategories] = useState([]);
     const [adList, setAdList] = useState([]);
-    const [adListDisplay, setAdListDisplay] = useState('none');
     const [pageCount, setPageCount] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
 
     const [resultOpacity, setResultOpacity] = useState(1);
     const [loading, setLoading] = useState(true);
 
     const getAdsList = async () => {
         setLoading(true);
+
+        let offset = (currentPage-1)*2;
+
         const json = await api.getAds({
             sort:'desc',
             limit:pageLimit,
             q,
             cat,
             state,
+            offset,
         });
         setAdList(json.ads)
         setAdsTotal(json.total);
@@ -58,8 +62,13 @@ const Page = () => {
     }, [adsTotal])
 
     useEffect(()=>{
-        loading ? setAdListDisplay('none') : setAdListDisplay('flex');
-    }, [loading])
+        setResultOpacity(0.3)
+        getAdsList();
+    }, [currentPage])
+
+    // useEffect(()=>{
+    //     loading ? setAdListDisplay('none') : setAdListDisplay('flex');
+    // }, [loading])
 
     useEffect(() => {
 
@@ -89,6 +98,8 @@ const Page = () => {
         timer = setTimeout(getAdsList, 2000)
 
         setResultOpacity(0.3);
+
+        setCurrentPage(1);
 
     }, [q, cat, state])
 
@@ -168,19 +179,19 @@ const Page = () => {
                 <div className="rightSide">
                     <h2>Resultados</h2>
                     
-                    {loading &&
+                    {loading && adList.length === 0 &&
                     
                         <div className="listWarning">Carregando...</div>
 
                     }
 
-                    {!loading && adList == '' &&
+                    {!loading && adList.length === 0 &&
                     
                         <div className="listWarning">Não encontramos resultados.</div>
                         
                     }
 
-                    <div className="list" style={{opacity:resultOpacity, display:adListDisplay}}>
+                    <div className="list" style={{opacity:resultOpacity}}>
                         {adList.map((i, k)=>
                             <AdItem key={k} data={i}/>
                         )}
@@ -190,7 +201,7 @@ const Page = () => {
                         {pageCount > 0 &&
                         
                             pagination.map((i, k)=>
-                                <div key={k} className="pagItem">{i}</div>
+                                <div onClick={()=>setCurrentPage(i)} key={k} className={i===currentPage ? 'pagItem active' : 'pagItem'}>{i}</div>
                             )
 
                         }

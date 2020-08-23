@@ -90,7 +90,7 @@ export const PageArea = styled.div`
             justify-content:center;
             margin:10px 0;
 
-            .pagItem {
+            .pagItem{
                 width:30px;
                 height:30px;
                 border:1px solid #000;
@@ -99,6 +99,20 @@ export const PageArea = styled.div`
                 justify-content:center;
                 font-size:14px;
                 margin: 0 5px;
+                cursor:pointer;
+
+                &.active{
+                    background-color:#ccc;
+                }
+
+                &.active:hover{
+                    border:1px solid #000;
+                }
+
+                &:hover{
+                    border:1px solid #999;
+                }
+
             }
 
         }
