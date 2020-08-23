@@ -6,6 +6,8 @@ import AdItem from '../../components/partials/AdItem';
 
 import { PageContainer } from '../../components/MainComponents';
  
+let timer;
+
 const Page = () => {
 
     const api = useApi();
@@ -23,6 +25,20 @@ const Page = () => {
     const [stateList, setStateList] = useState([]);
     const [categories, setCategories] = useState([]);
     const [adList, setAdList] = useState([]);
+
+    const [resultOpacity, setResultOpacity] = useState(1);
+
+    const getAdsList = async () => {
+        const json = await api.getAds({
+            sort:'desc',
+            limit:9,
+            q,
+            cat,
+            state,
+        });
+        setAdList(json.ads)
+        setResultOpacity(1);
+    }
 
     useEffect(() => {
 
@@ -44,6 +60,15 @@ const Page = () => {
             // search:`?${q != '' ? `q=${q}` : ``}${q != '' && state != '' ? `&` : ``}${state != '' ? `state=${state}` : ``}${(q != '' || state != '') && cat != '' ? `&` : ``}${cat != '' ? `cat=${cat}` : ``}`
             search:`?${queryString.join('&')}`
         })
+
+        if(timer) {
+            clearTimeout(timer);
+        }
+
+        timer = setTimeout(getAdsList, 2000)
+
+        setResultOpacity(0.3);
+
     }, [q, cat, state])
 
     useEffect(()=>{
@@ -116,7 +141,12 @@ const Page = () => {
                     </form>
                 </div>
                 <div className="rightSide">
-
+                    <h2>Resultados</h2>
+                    <div className="list" style={{opacity:resultOpacity}}>
+                        {adList.map((i, k)=>
+                            <AdItem key={k} data={i}/>
+                        )}
+                    </div>
                 </div>
             </PageArea>
         </PageContainer>
